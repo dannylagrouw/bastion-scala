@@ -21,7 +21,7 @@ import org.bastion.service.GenerateKeyService
 class GenerateKeyAdapter(service: GenerateKeyService) extends Adapter[GenerateKeyMessage] {
 
   def handle(message: GenerateKeyMessage) = {
-    message.key = service.generateKey(message.domainClass)
+    message.key = Some(service.generateKey(message.domainClass))
   }
 
 }

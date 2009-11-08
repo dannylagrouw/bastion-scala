@@ -30,8 +30,10 @@ class QueryMessage[T](val query: DomainQuery[T]) extends DomainMessage {
   var iterator: Iterator[T] = null
 
   def singleResult(): Option[T] = {
-    if (iterator.hasNext) {
-      Some(iterator.next)
+    if (iterator != null && iterator.hasNext) {
+      val value = iterator.next
+      iterator = null
+      Some(value)
     } else {
       None
     }

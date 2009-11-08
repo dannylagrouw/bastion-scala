@@ -15,8 +15,8 @@
  */
 package org.bastion.message
 
-class GenerateKeyMessage(val domainClass: java.lang.Class[AnyRef]) extends DomainMessage {
+class GenerateKeyMessage(val domainClass: Class[AnyRef]) extends DomainMessage {
 
-  var key: AnyRef = null
+  var key: Option[AnyRef] = None
 
 }

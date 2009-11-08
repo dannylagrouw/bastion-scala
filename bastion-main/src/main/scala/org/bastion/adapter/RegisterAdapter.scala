@@ -22,7 +22,7 @@ import org.bastion.service.RegisterService
 class RegisterAdapter(val service: RegisterService) extends Adapter[RegisterMessage] {
 
   def handle(message: RegisterMessage) = {
-    new RegisterMessage(message.domainObject, service.register(message.domainObject))
+    message.id = Some(service.register(message.domainObject))
   }
 
 }

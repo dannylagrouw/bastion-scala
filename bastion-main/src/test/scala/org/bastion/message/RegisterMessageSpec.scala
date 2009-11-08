@@ -17,30 +17,30 @@ package org.bastion.message
 
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
-import org.bastion.domain.{Level, Alert}
 
-class AlertMessageSpec extends Spec with ShouldMatchers {
+class RegisterMessageSpec extends Spec with ShouldMatchers {
 
-  describe("An AlertMessage") {
+  describe("A RegisterMessage") {
 
-    describe("(when initialized with an Alert)") {
-      val alert = new Alert("X", Level.ERROR)
-      val alertMessage = new AlertMessage(alert)
-
-      it("should contain that Alert") {
-        alertMessage.alert should not be (alert)
+    describe("(when intialized with a domain object)") {
+      val OBJECT = "object"
+      val message = new RegisterMessage(OBJECT)
+      it("should contain that object") {
+        message.domainObject should be (OBJECT)
+      }
+      it("should contain an empty id") {
+        message.id should be (None)
       }
     }
 
-    describe("(when initialized with parameters by its companion object)") {
-      val alertMessage = AlertMessage("X", Level.ERROR, "1", "2", "3")
-
-      it("should contain an Alert with those parameters") {
-        val alert = alertMessage.alert
-        alert.code should be ("X")
-        alert.level should be (Level.ERROR)
-        alert.args should be (List("1", "2", "3"))
+    describe("(when passed an id)") {
+      val message = new RegisterMessage("object")
+      message.id = Some(12345)
+      it("should contain that id") {
+        message.id should be (Some(12345))
       }
     }
+
   }
+
 }

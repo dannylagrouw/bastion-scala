@@ -20,9 +20,9 @@ package org.bastion.message
  * registered with the domain. A listening service may assign a unique ID number
  * to the object.
  */
-class RegisterMessage(val domainObject: AnyRef, val id: Any) extends DomainMessage {
+class RegisterMessage(val domainObject: AnyRef) extends DomainMessage {
 
-  def this(domainObject: AnyRef) = this(domainObject, null)
+  var id: Option[Any] = None
 
 }
 
