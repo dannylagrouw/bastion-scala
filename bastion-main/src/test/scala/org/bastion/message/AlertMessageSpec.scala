@@ -28,7 +28,7 @@ class AlertMessageSpec extends Spec with ShouldMatchers {
       val alertMessage = new AlertMessage(alert)
 
       it("should contain that Alert") {
-        alertMessage.alert should not be (alert)
+        alertMessage.alert should be (alert)
       }
     }
 
