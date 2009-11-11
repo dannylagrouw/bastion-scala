@@ -17,6 +17,6 @@ package org.bastion.service
 
 trait GenerateKeyService {
 
-  def generateKey(domainClass: Class[AnyRef]): AnyRef
+  def generateKey(domainClass: Class[AnyRef]): Any
 
 }

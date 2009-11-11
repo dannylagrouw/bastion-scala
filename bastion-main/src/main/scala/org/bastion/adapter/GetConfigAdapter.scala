@@ -17,6 +17,7 @@ package org.bastion.adapter
 
 import org.bastion.service.ConfigService
 import org.bastion.message.GetConfigMessage
+import util.matching.Regex
 
 /**
  * Adapter that lets an instance of ConfigService handle GetConfigMessages.
@@ -28,15 +29,23 @@ class GetConfigAdapter(val service: ConfigService) extends Adapter[GetConfigMess
   def handle(message: GetConfigMessage) = {
     message.resultMap =
       if (message.propertyName != null) {
-        service.getConfig(message.propertyName) match {
-          case Some(value) => Some(Map(message.propertyName -> value))
-          case _ => None
-        }
+        getPropertyByName(message.propertyName)
       } else if (message.propertyFilter != null) {
-        Some(service.getConfig(message.propertyFilter))
+        getPropertyByFilter(message.propertyFilter)
       } else {
         None
       }
+  }
+
+  private[this] def getPropertyByName(name: String) = {
+    service.getConfig(name) match {
+      case Some(value) => Some(Map(name -> value))
+      case _ => None
+    }
+  }
+
+  private[this] def getPropertyByFilter(filter: Regex) = {
+    Some(service.getConfig(filter))
   }
 
 }

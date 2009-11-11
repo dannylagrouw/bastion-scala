@@ -34,6 +34,10 @@ class DomainQuery[T](implicit m: Manifest[T]) {
   // TODO matcherInternal becomes Option[...]
   var hasMatcher: Boolean = false
 
+  override def toString: String = {
+    "DomainQuery, class=" + domainClass + ", name=" + name + ", matcher=" + matcher
+  }
+
 }
 
 object DomainQuery {

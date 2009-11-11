@@ -13,16 +13,19 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  */
-
 package org.bastion.adapter
 
 import org.bastion.message.RegisterMessage
 import org.bastion.service.RegisterService
 
+/**
+ * Handles a {@link RegisterMessage} by registering its domain object with
+ * a {@link RegisterService}.
+ */
 class RegisterAdapter(val service: RegisterService) extends Adapter[RegisterMessage] {
 
   def handle(message: RegisterMessage) = {
-    message.id = Some(service.register(message.domainObject))
+    message.id = service.register(message.domainObject)
   }
 
 }

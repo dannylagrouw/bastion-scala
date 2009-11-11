@@ -19,6 +19,11 @@ import org.bastion.message.QueryMessage
 import org.bastion.service.QueryService
 import org.bastion.exception.{InvalidQueryServiceException, UnsupportedQueryException}
 
+/**
+ * Handles a {@link QueryMessage} by letting a {@link QueryService} execute its query.
+ * Checks that the service is able to execute the query, otherwise an
+ * {@link UnsupportedQueryException} is thrown.
+ */
 class QueryAdapter(val service: QueryService) extends Adapter[QueryMessage[Any]] {
 
   def handle(message: QueryMessage[Any]) = {
