@@ -20,8 +20,8 @@ import java.lang.Class
 
 class MemoryService(val memoryStore: MemoryStore) extends RegisterService with FindService with QueryService {
 
-  def register(domainObject: AnyRef): Any = {
-    memoryStore.register(domainObject)
+  def register(domainObject: AnyRef): Option[Any] = {
+    Some(memoryStore.register(domainObject))
   }
 
   def find[T](t: Class[T], key: Any): Option[T] = {
