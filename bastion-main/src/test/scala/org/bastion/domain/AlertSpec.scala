@@ -13,34 +13,38 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License. 
  */
-package org.bastion.message
+package org.bastion.domain
 
-import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
-import org.bastion.domain.{Level, Alert}
+import org.scalatest.Spec
 
-class AlertMessageSpec extends Spec with ShouldMatchers {
-
-  describe("An AlertMessage") {
-
-    describe("(when initialized with an Alert)") {
+class AlertSpec extends Spec with ShouldMatchers {
+  describe("An Alert") {
+    describe("(when initialized with code and level)") {
       val alert = new Alert("X", Level.ERROR)
-      val alertMessage = new AlertMessage(alert)
-
-      it("should contain that Alert") {
-        alertMessage.alert should be (alert)
+      it("should contain that code") {
+        alert.code should be ("X")
+      }
+      it("should contain that level") {
+        alert.level should be (Level.ERROR)
+      }
+      it("should not contain any parameters") {
+        alert.params should be ('empty)
       }
     }
 
-    describe("(when initialized with parameters by its companion object)") {
-      val alertMessage = AlertMessage("X", Level.ERROR, "1", "2", "3")
-
-      it("should contain an Alert with those parameters") {
-        val alert = alertMessage.alert
+    describe("(when initialized with code, level and params)") {
+      val alert = new Alert("X", Level.ERROR, "1", "2")
+      it("should contain that code") {
         alert.code should be ("X")
+      }
+      it("should contain that level") {
         alert.level should be (Level.ERROR)
-        alert.params should be (List("1", "2", "3"))
+      }
+      it("should contain those parameters") {
+        alert.params should be (List("1", "2"))
       }
     }
   }
+
 }
