@@ -27,7 +27,7 @@ import org.bastion.message.DomainMessage
  */
 class Domain {
   
-  private[this] var adapters = mutable.Map[String, List[Adapter[DomainMessage]]]()
+  var adapters = mutable.Map[String, List[Adapter[DomainMessage]]]()
 
   /**
    * Registers an {@link Adapter} for a specific type T of @{link DomainMessage}
@@ -66,7 +66,7 @@ object Domain {
   
   private[this] val threadGlobal = new ThreadGlobal[Domain]
   
-  private[this] def instance = {
+  def instance = {
     if (threadGlobal.value == null) {
       threadGlobal.set(new Domain)
     }
