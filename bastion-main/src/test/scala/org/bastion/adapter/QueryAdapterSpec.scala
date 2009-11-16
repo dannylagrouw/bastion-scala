@@ -29,15 +29,6 @@ class QueryAdapterSpec extends Spec with ShouldMatchers {
   describe("A QueryAdapter") {
     val service = new QueryService {
       var lastCall = ""
-      var prefersNamedQueriesInternal = false
-      var prefersPredicateQueriesInternal = false
-      var supportsNamedQueriesInternal = false
-      var supportsPredicateQueriesInternal = false
-
-      override def prefersNamedQueries = prefersNamedQueriesInternal
-      override def prefersPredicateQueries = prefersPredicateQueriesInternal
-      override def supportsNamedQueries = supportsNamedQueriesInternal
-      override def supportsPredicateQueries = supportsPredicateQueriesInternal
 
       def executeQuery[T](domainClass: Class[T]) = {
         lastCall = "executeQuery"
@@ -57,10 +48,10 @@ class QueryAdapterSpec extends Spec with ShouldMatchers {
       def reset(prefersNamedQueries: Boolean = false, prefersPredicateQueries: Boolean = false,
           supportsNamedQueries: Boolean = false, supportsPredicateQueries: Boolean = false) = {
         lastCall = ""
-        this.prefersNamedQueriesInternal = prefersNamedQueries
-        this.prefersPredicateQueriesInternal = prefersPredicateQueries
-        this.supportsNamedQueriesInternal = supportsNamedQueries
-        this.supportsPredicateQueriesInternal = supportsPredicateQueries
+        this.prefersNamedQueries = prefersNamedQueries
+        this.prefersPredicateQueries = prefersPredicateQueries
+        this.supportsNamedQueries = supportsNamedQueries
+        this.supportsPredicateQueries = supportsPredicateQueries
       }
 
       override def toString: String = {

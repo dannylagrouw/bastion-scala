@@ -28,9 +28,9 @@ class MemoryService(val memoryStore: MemoryStore) extends RegisterService with F
     memoryStore.find(t, key)
   }
 
-  override def prefersPredicateQueries = true
+  prefersPredicateQueries = true
 
-  override def supportsPredicateQueries = true
+  supportsPredicateQueries = true
 
   override def executeQuery[T](domainClass: Class[T]) = memoryStore.executeQuery(domainClass)
 

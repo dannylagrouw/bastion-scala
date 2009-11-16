@@ -34,13 +34,13 @@ class QueryAdapter(val service: QueryService) extends Adapter[QueryMessage[Any]]
       } else if (!query.hasMatcher) {
         message.iterator = service.executeQuery(query.domainClass)
       } else if (service.supportsPredicateQueries) {
-        message.iterator = service.executePredicateQuery(query.domainClass)(query.matcher)
+        message.iterator = service.executePredicateQuery(query.domainClass)(query.matcher.get)
       } else {
         throw new UnsupportedQueryException(service, query)
       }
     } else if (service.prefersPredicateQueries) {
       if (query.hasMatcher) {
-        message.iterator = service.executePredicateQuery(query.domainClass)(query.matcher)
+        message.iterator = service.executePredicateQuery(query.domainClass)(query.matcher.get)
       } else if (query.name == None) {
         message.iterator = service.executeQuery(query.domainClass)
       } else if (service.supportsNamedQueries) {

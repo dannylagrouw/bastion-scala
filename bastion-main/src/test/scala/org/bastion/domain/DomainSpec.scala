@@ -107,7 +107,6 @@ class DomainSpec extends Spec with ShouldMatchers {
           val actor2 = actor {
             receive {
               case actor: Actor => {
-                println("actor2 received message from other actor for domain " + Domain.instance)
                 actor ! Domain.instance
               }
             }
@@ -116,7 +115,6 @@ class DomainSpec extends Spec with ShouldMatchers {
           actor2 ! self
           self.receiveWithin(500) {
             case domain: Domain => {
-              println("self received domain " + domain + "; its own domain is " + Domain.instance)
               otherDomain = domain
             }
           }

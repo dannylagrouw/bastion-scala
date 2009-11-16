@@ -55,7 +55,7 @@ class QueryMessageSpec extends Spec with ShouldMatchers {
       val message = QueryMessage.matches[String](matcher)
 
       it("should contain a query with that matcher") {
-        message.query.matcher should be (matcher)
+        message.query.matcher should be (Some(matcher))
       }
     }
 

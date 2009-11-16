@@ -13,26 +13,26 @@ package org.bastion.query
  *
  * @param <T>
  */
-// TODO specialize
 class DomainQuery[T](implicit m: Manifest[T]) {
 
   val domainClass = m.erasure
 
-  private[this] var matcherInternal: T => Boolean = { t => true }
+  private[this] var matcherInternal: Option[T => Boolean] = None
 
   def matcher = matcherInternal
 
   def matcher_=(f: T => Boolean): Unit = {
-    matcherInternal = f
-    hasMatcher = true
+    matcherInternal = Some(f)
   }
 
   var name: Option[String] = None
 
-  var parameters = Map[String, Any]()
+  var parameters = Map.empty[String, Any]
 
-  // TODO matcherInternal becomes Option[...]
-  var hasMatcher: Boolean = false
+  def hasMatcher: Boolean = matcherInternal match {
+    case Some(f) => true
+    case _ => false
+  }
 
   override def toString: String = {
     "DomainQuery, class=" + domainClass + ", name=" + name + ", matcher=" + matcher
